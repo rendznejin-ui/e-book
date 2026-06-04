@@ -1,14 +1,14 @@
 <x-storefront-layout>
     <x-slot name="title">Your Cart</x-slot>
 
-    <h1 class="text-2xl font-bold text-gray-900 mb-6">Your Cart</h1>
+    <h1 class="font-serif text-3xl font-semibold text-gray-900 mb-6">Your Cart</h1>
 
     <div id="cart-wrapper" class="{{ $items->isEmpty() ? '' : 'grid lg:grid-cols-3 gap-8' }}">
         {{-- Empty state --}}
         <div id="cart-empty" class="{{ $items->isEmpty() ? '' : 'hidden' }} lg:col-span-3 rounded-lg border border-dashed border-gray-300 bg-white py-16 text-center">
             <p class="text-4xl mb-2">🛒</p>
             <p class="text-gray-600">Your cart is empty.</p>
-            <a href="{{ route('books.index') }}" class="mt-4 inline-block rounded-md bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700">
+            <a href="{{ route('books.index') }}" class="mt-4 inline-block rounded-md bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700">
                 Browse books
             </a>
         </div>
@@ -27,7 +27,7 @@
                         </div>
 
                         <div class="flex-1 min-w-0">
-                            <a href="{{ route('books.show', $item->book) }}" class="font-medium text-gray-900 hover:text-indigo-600 line-clamp-1">
+                            <a href="{{ route('books.show', $item->book) }}" class="font-medium text-gray-900 hover:text-brand-600 line-clamp-1">
                                 {{ $item->book->title }}
                             </a>
                             <p class="text-sm text-gray-500">{{ $item->book->author }}</p>
@@ -65,7 +65,7 @@
                 <p class="mt-1 text-xs text-gray-400">Taxes and totals are calculated at checkout.</p>
 
                 <a href="{{ route('checkout.create') }}"
-                   class="mt-6 block w-full rounded-md bg-indigo-600 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-indigo-700">
+                   class="mt-6 block w-full rounded-md bg-brand-600 px-5 py-3 text-center text-sm font-semibold text-white hover:bg-brand-700">
                     Proceed to checkout
                 </a>
                 <a href="{{ route('books.index') }}" class="mt-3 block text-center text-sm text-gray-500 hover:text-gray-700">

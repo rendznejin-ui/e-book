@@ -2,7 +2,7 @@
     <x-slot name="title">Categories</x-slot>
 
     <div class="flex justify-end mb-5">
-        <a href="{{ route('admin.categories.create') }}" class="rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700">+ New category</a>
+        <a href="{{ route('admin.categories.create') }}" class="rounded-md bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">+ New category</a>
     </div>
 
     <div class="overflow-hidden rounded-lg border border-gray-200 bg-white">
@@ -22,7 +22,7 @@
                         <td class="px-4 py-3 text-gray-500">{{ $category->slug }}</td>
                         <td class="px-4 py-3 text-gray-600">{{ $category->books_count }}</td>
                         <td class="px-4 py-3 text-right whitespace-nowrap">
-                            <a href="{{ route('admin.categories.edit', $category) }}" class="text-indigo-600 hover:text-indigo-800 font-medium">Edit</a>
+                            <a href="{{ route('admin.categories.edit', $category) }}" class="text-brand-600 hover:text-brand-800 font-medium">Edit</a>
                             <form method="POST" action="{{ route('admin.categories.destroy', $category) }}" class="inline ml-3"
                                   onsubmit="return confirm('Delete this category?')">
                                 @csrf @method('DELETE')

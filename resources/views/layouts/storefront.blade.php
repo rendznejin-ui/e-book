@@ -7,31 +7,38 @@
     <title>{{ $title ?? 'Books' }} — {{ config('app.name', 'E-Book') }}</title>
 
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700|fraunces:400,500,600,700,9..144&display=swap" rel="stylesheet" />
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans antialiased bg-gray-50 text-gray-800">
+<body class="font-sans antialiased bg-stone-50 text-gray-800">
     <div class="min-h-screen flex flex-col">
+        {{-- ===================== Announcement bar ===================== --}}
+        <div class="bg-ink text-stone-200 text-xs">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-9 flex items-center justify-center gap-2">
+                <span class="hidden sm:inline">📖</span>
+                <span>Free PDF previews on every title · Secure checkout · Instant digital receipts</span>
+            </div>
+        </div>
+
         {{-- ===================== Top navigation ===================== --}}
-        <nav class="bg-white border-b border-gray-200 sticky top-0 z-40">
+        <nav class="bg-white/90 backdrop-blur border-b border-gray-200 sticky top-0 z-40">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex h-16 items-center justify-between gap-4">
                     {{-- Brand --}}
-                    <a href="{{ route('books.index') }}" class="flex items-center gap-2 shrink-0">
-                        <span class="text-2xl">📚</span>
-                        <span class="text-xl font-semibold text-gray-900">{{ config('app.name', 'E-Book') }}</span>
+                    <a href="{{ route('books.index') }}" class="flex items-center gap-2 shrink-0 group">
+                        <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white text-lg shadow-sm group-hover:bg-brand-700 transition">📚</span>
+                        <span class="font-serif text-2xl font-semibold text-gray-900 tracking-tight">{{ config('app.name', 'E-Book') }}</span>
                     </a>
 
                     {{-- Search (GET to catalog) --}}
                     <form action="{{ route('books.index') }}" method="GET" class="hidden md:flex flex-1 max-w-md">
-                        <input type="search" name="q" value="{{ request('q') }}"
-                               placeholder="Search title or author…"
-                               class="w-full rounded-l-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 text-sm" />
-                        <button type="submit"
-                                class="rounded-r-md bg-indigo-600 px-4 text-sm font-medium text-white hover:bg-indigo-700">
-                            Search
-                        </button>
+                        <div class="relative w-full">
+                            <svg class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.3-4.3m1.8-4.45a6.25 6.25 0 1 1-12.5 0 6.25 6.25 0 0 1 12.5 0Z"/></svg>
+                            <input type="search" name="q" value="{{ request('q') }}"
+                                   placeholder="Search title or author…"
+                                   class="w-full rounded-full border-gray-300 bg-stone-50 pl-10 pr-4 text-sm focus:border-brand-500 focus:ring-brand-500 focus:bg-white" />
+                        </div>
                     </form>
 
                     {{-- Right side --}}
@@ -60,7 +67,7 @@
                         <a href="{{ route('cart.index') }}" class="relative inline-flex items-center rounded-md p-2 text-gray-600 hover:text-gray-900" title="Cart">
                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-.534 1.872-1.5 2.182-3l.318-2.5H6.106M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
                             <span id="cart-count"
-                                  class="absolute -top-0.5 -right-0.5 inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-indigo-600 px-1 text-xs font-semibold text-white {{ ($cartCount ?? 0) < 1 ? 'hidden' : '' }}">
+                                  class="absolute -top-0.5 -right-0.5 inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-brand-600 px-1 text-xs font-semibold text-white {{ ($cartCount ?? 0) < 1 ? 'hidden' : '' }}">
                                 {{ $cartCount ?? 0 }}
                             </span>
                         </a>
@@ -92,9 +99,9 @@
                                 </x-slot>
                             </x-dropdown>
                         @else
-                            <a href="{{ route('login') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900">Log in</a>
+                            <a href="{{ route('login') }}" class="hidden sm:inline text-sm font-medium text-gray-600 hover:text-gray-900">Log in</a>
                             <a href="{{ route('register') }}"
-                               class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-700">Register</a>
+                               class="rounded-full bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-brand-700 transition">Register</a>
                         @endauth
                     </div>
                 </div>
@@ -104,7 +111,8 @@
         {{-- ===================== Flash messages ===================== --}}
         @if (session('success'))
             <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 mt-4">
-                <div class="rounded-md bg-green-50 border border-green-200 px-4 py-3 text-sm text-green-800">
+                <div class="flex items-center gap-2 rounded-lg bg-brand-50 border border-brand-200 px-4 py-3 text-sm text-brand-800">
+                    <svg class="h-5 w-5 shrink-0 text-brand-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
                     {{ session('success') }}
                 </div>
             </div>
@@ -116,10 +124,46 @@
         </main>
 
         {{-- ===================== Footer ===================== --}}
-        <footer class="border-t border-gray-200 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-sm text-gray-500 flex justify-between">
-                <span>&copy; {{ date('Y') }} {{ config('app.name', 'E-Book') }}</span>
-                <span>Online Book Store</span>
+        <footer class="mt-12 border-t border-gray-200 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                    <div class="lg:col-span-2">
+                        <div class="flex items-center gap-2">
+                            <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white text-lg">📚</span>
+                            <span class="font-serif text-2xl font-semibold text-gray-900">{{ config('app.name', 'E-Book') }}</span>
+                        </div>
+                        <p class="mt-4 max-w-sm text-sm text-gray-500">
+                            Your modern online bookstore. Discover, preview, and collect great reads —
+                            with a fast, secure checkout and instant digital receipts.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-xs font-semibold uppercase tracking-wider text-gray-400">Shop</h3>
+                        <ul class="mt-4 space-y-2 text-sm">
+                            <li><a href="{{ route('books.index') }}" class="text-gray-600 hover:text-brand-700">All books</a></li>
+                            @foreach ($navCategories->take(4) as $navCategory)
+                                <li><a href="{{ route('books.index', ['category' => $navCategory->slug]) }}" class="text-gray-600 hover:text-brand-700">{{ $navCategory->name }}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs font-semibold uppercase tracking-wider text-gray-400">Account</h3>
+                        <ul class="mt-4 space-y-2 text-sm">
+                            @auth
+                                <li><a href="{{ route('orders.index') }}" class="text-gray-600 hover:text-brand-700">My orders</a></li>
+                                <li><a href="{{ route('wishlist.index') }}" class="text-gray-600 hover:text-brand-700">My wishlist</a></li>
+                                <li><a href="{{ route('cart.index') }}" class="text-gray-600 hover:text-brand-700">Cart</a></li>
+                            @else
+                                <li><a href="{{ route('login') }}" class="text-gray-600 hover:text-brand-700">Log in</a></li>
+                                <li><a href="{{ route('register') }}" class="text-gray-600 hover:text-brand-700">Create account</a></li>
+                            @endauth
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-10 border-t border-gray-100 pt-6 flex flex-col sm:flex-row justify-between gap-2 text-xs text-gray-400">
+                    <span>&copy; {{ date('Y') }} {{ config('app.name', 'E-Book') }}. All rights reserved.</span>
+                    <span>Built with Laravel · Demo store</span>
+                </div>
             </div>
         </footer>
     </div>

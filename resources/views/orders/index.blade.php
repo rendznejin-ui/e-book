@@ -1,7 +1,7 @@
 <x-storefront-layout>
     <x-slot name="title">My Orders</x-slot>
 
-    <h1 class="text-2xl font-bold text-gray-900 mb-6">My Orders</h1>
+    <h1 class="font-serif text-3xl font-semibold text-gray-900 mb-6">My Orders</h1>
 
     @php
         $badge = [
@@ -16,7 +16,7 @@
         <div class="rounded-lg border border-dashed border-gray-300 bg-white py-16 text-center">
             <p class="text-4xl mb-2">🧾</p>
             <p class="text-gray-600">You have no orders yet.</p>
-            <a href="{{ route('books.index') }}" class="mt-4 inline-block rounded-md bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700">Start shopping</a>
+            <a href="{{ route('books.index') }}" class="mt-4 inline-block rounded-md bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700">Start shopping</a>
         </div>
     @else
         <div class="overflow-hidden rounded-lg border border-gray-200 bg-white">
@@ -44,7 +44,7 @@
                                 </span>
                             </td>
                             <td class="px-4 py-3 text-right">
-                                <a href="{{ route('orders.show', $order) }}" class="text-indigo-600 hover:text-indigo-800 font-medium">View</a>
+                                <a href="{{ route('orders.show', $order) }}" class="text-brand-600 hover:text-brand-800 font-medium">View</a>
                             </td>
                         </tr>
                     @endforeach

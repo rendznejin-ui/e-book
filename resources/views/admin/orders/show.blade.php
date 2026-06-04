@@ -53,12 +53,12 @@
                 <h2 class="font-semibold text-gray-900 mb-3">Update status</h2>
                 <form method="POST" action="{{ route('admin.orders.status', $order) }}" class="flex gap-2">
                     @csrf @method('PATCH')
-                    <select name="status" class="flex-1 rounded-md border-gray-300 text-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <select name="status" class="flex-1 rounded-md border-gray-300 text-sm focus:border-brand-500 focus:ring-brand-500">
                         @foreach (['pending', 'paid', 'cancelled', 'refunded'] as $s)
                             <option value="{{ $s }}" @selected($order->status === $s)>{{ ucfirst($s) }}</option>
                         @endforeach
                     </select>
-                    <button class="rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700">Save</button>
+                    <button class="rounded-md bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">Save</button>
                 </form>
             </div>
         </div>

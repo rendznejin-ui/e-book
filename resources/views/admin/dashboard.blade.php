@@ -25,14 +25,14 @@
         <div class="lg:col-span-2 rounded-lg border border-gray-200 bg-white">
             <div class="px-5 py-4 border-b border-gray-200 flex items-center justify-between">
                 <h2 class="font-semibold text-gray-900">Recent orders</h2>
-                <a href="{{ route('admin.orders.index') }}" class="text-sm text-indigo-600 hover:text-indigo-800">View all</a>
+                <a href="{{ route('admin.orders.index') }}" class="text-sm text-brand-600 hover:text-brand-800">View all</a>
             </div>
             <table class="min-w-full text-sm">
                 <tbody class="divide-y divide-gray-100">
                     @forelse ($recentOrders as $order)
                         <tr class="hover:bg-gray-50">
                             <td class="px-5 py-3">
-                                <a href="{{ route('admin.orders.show', $order) }}" class="font-medium text-gray-900 hover:text-indigo-600">{{ $order->order_number }}</a>
+                                <a href="{{ route('admin.orders.show', $order) }}" class="font-medium text-gray-900 hover:text-brand-600">{{ $order->order_number }}</a>
                                 <div class="text-xs text-gray-500">{{ $order->user->name ?? '—' }}</div>
                             </td>
                             <td class="px-5 py-3 text-gray-600">{{ $order->created_at->format('M j') }}</td>
@@ -53,7 +53,7 @@
                 <ul class="divide-y divide-gray-100 text-sm">
                     @forelse ($lowStock as $book)
                         <li class="px-5 py-3 flex justify-between">
-                            <a href="{{ route('admin.books.edit', $book) }}" class="text-gray-700 hover:text-indigo-600 line-clamp-1">{{ $book->title }}</a>
+                            <a href="{{ route('admin.books.edit', $book) }}" class="text-gray-700 hover:text-brand-600 line-clamp-1">{{ $book->title }}</a>
                             <span class="font-semibold {{ $book->stock_qty == 0 ? 'text-red-600' : 'text-amber-600' }}">{{ $book->stock_qty }}</span>
                         </li>
                     @empty

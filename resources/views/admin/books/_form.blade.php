@@ -18,18 +18,18 @@
             <div class="sm:col-span-2">
                 <label class="block text-sm font-medium text-gray-700">Title</label>
                 <input name="title" value="{{ old('title', $book->title) }}" required
-                       class="mt-1 w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
+                       class="mt-1 w-full rounded-md border-gray-300 focus:border-brand-500 focus:ring-brand-500">
             </div>
 
             <div>
                 <label class="block text-sm font-medium text-gray-700">Author</label>
                 <input name="author" value="{{ old('author', $book->author) }}" required
-                       class="mt-1 w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
+                       class="mt-1 w-full rounded-md border-gray-300 focus:border-brand-500 focus:ring-brand-500">
             </div>
 
             <div>
                 <label class="block text-sm font-medium text-gray-700">Category</label>
-                <select name="category_id" required class="mt-1 w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
+                <select name="category_id" required class="mt-1 w-full rounded-md border-gray-300 focus:border-brand-500 focus:ring-brand-500">
                     <option value="">Select…</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}" @selected(old('category_id', $book->category_id) == $category->id)>{{ $category->name }}</option>
@@ -41,24 +41,24 @@
                 <label class="block text-sm font-medium text-gray-700">Price (USD)</label>
                 <input name="price" type="number" step="0.01" min="0"
                        value="{{ old('price', $book->price_cents !== null ? number_format($book->price_cents / 100, 2, '.', '') : '') }}" required
-                       class="mt-1 w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
+                       class="mt-1 w-full rounded-md border-gray-300 focus:border-brand-500 focus:ring-brand-500">
             </div>
 
             <div>
                 <label class="block text-sm font-medium text-gray-700">Stock</label>
                 <input name="stock_qty" type="number" min="0" value="{{ old('stock_qty', $book->stock_qty ?? 0) }}" required
-                       class="mt-1 w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
+                       class="mt-1 w-full rounded-md border-gray-300 focus:border-brand-500 focus:ring-brand-500">
             </div>
 
             <div>
                 <label class="block text-sm font-medium text-gray-700">ISBN <span class="text-gray-400">(optional)</span></label>
                 <input name="isbn" value="{{ old('isbn', $book->isbn) }}"
-                       class="mt-1 w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
+                       class="mt-1 w-full rounded-md border-gray-300 focus:border-brand-500 focus:ring-brand-500">
             </div>
 
             <div class="sm:col-span-2">
                 <label class="block text-sm font-medium text-gray-700">Description</label>
-                <textarea name="description" rows="4" class="mt-1 w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500">{{ old('description', $book->description) }}</textarea>
+                <textarea name="description" rows="4" class="mt-1 w-full rounded-md border-gray-300 focus:border-brand-500 focus:ring-brand-500">{{ old('description', $book->description) }}</textarea>
             </div>
 
             <div>
@@ -81,13 +81,13 @@
         </div>
 
         <label class="flex items-center gap-2">
-            <input type="checkbox" name="is_active" value="1" @checked(old('is_active', $book->is_active)) class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+            <input type="checkbox" name="is_active" value="1" @checked(old('is_active', $book->is_active)) class="rounded border-gray-300 text-brand-600 focus:ring-brand-500">
             <span class="text-sm text-gray-700">Active (visible in store)</span>
         </label>
     </div>
 
     <div class="mt-5 flex gap-3">
-        <button class="rounded-md bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700">Save book</button>
+        <button class="rounded-md bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700">Save book</button>
         <a href="{{ route('admin.books.index') }}" class="rounded-md border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</a>
     </div>
 </form>

@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ?? 'Admin' }} — {{ config('app.name', 'E-Book') }}</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700|fraunces:400,500,600,700&display=swap" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans antialiased bg-gray-100 text-gray-800">
@@ -29,7 +29,7 @@
             <nav class="flex-1 px-3 py-4 space-y-1">
                 @foreach ($nav as [$route, $label, $pattern])
                     <a href="{{ route($route) }}"
-                       class="block rounded-md px-3 py-2 text-sm font-medium {{ request()->is($pattern) ? 'bg-indigo-600 text-white' : 'hover:bg-gray-800 hover:text-white' }}">
+                       class="block rounded-md px-3 py-2 text-sm font-medium {{ request()->is($pattern) ? 'bg-brand-600 text-white' : 'hover:bg-gray-800 hover:text-white' }}">
                         {{ $label }}
                     </a>
                 @endforeach

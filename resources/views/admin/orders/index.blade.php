@@ -13,10 +13,10 @@
     {{-- Status filter --}}
     <div class="mb-5 flex flex-wrap gap-2">
         <a href="{{ route('admin.orders.index') }}"
-           class="rounded-full px-3 py-1 text-sm {{ ! $activeStatus ? 'bg-indigo-600 text-white' : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50' }}">All</a>
+           class="rounded-full px-3 py-1 text-sm {{ ! $activeStatus ? 'bg-brand-600 text-white' : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50' }}">All</a>
         @foreach ($statuses as $status)
             <a href="{{ route('admin.orders.index', ['status' => $status]) }}"
-               class="rounded-full px-3 py-1 text-sm capitalize {{ $activeStatus === $status ? 'bg-indigo-600 text-white' : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50' }}">{{ $status }}</a>
+               class="rounded-full px-3 py-1 text-sm capitalize {{ $activeStatus === $status ? 'bg-brand-600 text-white' : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50' }}">{{ $status }}</a>
         @endforeach
     </div>
 
@@ -45,7 +45,7 @@
                             <span class="inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium {{ $badge[$order->status] ?? '' }}">{{ ucfirst($order->status) }}</span>
                         </td>
                         <td class="px-4 py-3 text-right">
-                            <a href="{{ route('admin.orders.show', $order) }}" class="text-indigo-600 hover:text-indigo-800 font-medium">Manage</a>
+                            <a href="{{ route('admin.orders.show', $order) }}" class="text-brand-600 hover:text-brand-800 font-medium">Manage</a>
                         </td>
                     </tr>
                 @empty

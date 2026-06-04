@@ -1,7 +1,7 @@
 <x-storefront-layout>
     <x-slot name="title">Checkout</x-slot>
 
-    <h1 class="text-2xl font-bold text-gray-900 mb-6">Checkout</h1>
+    <h1 class="font-serif text-3xl font-semibold text-gray-900 mb-6">Checkout</h1>
 
     <form method="POST" action="{{ route('checkout.store') }}" class="grid lg:grid-cols-3 gap-8">
         @csrf
@@ -21,20 +21,20 @@
                     <label for="shipping_name" class="block text-sm font-medium text-gray-700">Full name</label>
                     <input id="shipping_name" name="shipping_name" type="text" required
                            value="{{ old('shipping_name', $user->name) }}"
-                           class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                           class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-brand-500 focus:ring-brand-500">
                 </div>
 
                 <div>
                     <label for="shipping_address" class="block text-sm font-medium text-gray-700">Address</label>
                     <textarea id="shipping_address" name="shipping_address" rows="3" required
-                              class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">{{ old('shipping_address') }}</textarea>
+                              class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-brand-500 focus:ring-brand-500">{{ old('shipping_address') }}</textarea>
                 </div>
 
                 <div>
                     <label for="shipping_phone" class="block text-sm font-medium text-gray-700">Phone</label>
                     <input id="shipping_phone" name="shipping_phone" type="text" required
                            value="{{ old('shipping_phone') }}"
-                           class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                           class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-brand-500 focus:ring-brand-500">
                 </div>
             </div>
         </div>
@@ -69,7 +69,7 @@
                 </dl>
 
                 <button type="submit"
-                        class="mt-6 w-full rounded-md bg-indigo-600 px-5 py-3 text-sm font-semibold text-white hover:bg-indigo-700">
+                        class="mt-6 w-full rounded-md bg-brand-600 px-5 py-3 text-sm font-semibold text-white hover:bg-brand-700">
                     Continue to payment
                 </button>
                 <a href="{{ route('cart.index') }}" class="mt-3 block text-center text-sm text-gray-500 hover:text-gray-700">

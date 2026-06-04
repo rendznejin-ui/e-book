@@ -7,7 +7,7 @@
                 <svg class="h-9 w-9 text-green-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
             </div>
 
-            <h1 class="mt-5 text-2xl font-bold text-gray-900">Payment successful</h1>
+            <h1 class="mt-5 font-serif text-3xl font-semibold text-gray-900">Payment successful</h1>
             <p class="mt-2 text-gray-600">
                 Thank you! Your order <span class="font-semibold">{{ $order->order_number }}</span> is confirmed.
             </p>
@@ -29,7 +29,7 @@
 
             <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
                 <a href="{{ route('orders.show', $order) }}"
-                   class="rounded-md bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700">
+                   class="rounded-md bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700">
                     View receipt
                 </a>
                 <a href="{{ route('orders.receipt', $order) }}"

@@ -24,7 +24,7 @@
 
         {{-- Details --}}
         <div class="md:col-span-2">
-            <h1 class="text-3xl font-bold text-gray-900">{{ $book->title }}</h1>
+            <h1 class="font-serif text-4xl font-semibold leading-tight text-gray-900">{{ $book->title }}</h1>
             <p class="mt-2 text-lg text-gray-600">by {{ $book->author }}</p>
 
             <div class="mt-3 flex items-center gap-3">
@@ -50,7 +50,7 @@
                 <button type="button"
                         data-add-to-cart data-book-id="{{ $book->id }}"
                         @disabled($book->stock_qty < 1)
-                        class="rounded-md bg-indigo-600 px-6 py-3 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed">
+                        class="rounded-md bg-brand-600 px-6 py-3 text-sm font-semibold text-white hover:bg-brand-700 disabled:opacity-50 disabled:cursor-not-allowed">
                     Add to cart
                 </button>
 
@@ -103,8 +103,8 @@
                             @endfor
                         </div>
                         <textarea name="comment" rows="3" maxlength="2000" placeholder="Share your thoughts (optional)…"
-                                  class="w-full rounded-md border-gray-300 text-sm focus:border-indigo-500 focus:ring-indigo-500">{{ old('comment') }}</textarea>
-                        <button type="submit" class="rounded-md bg-indigo-600 px-5 py-2 text-sm font-semibold text-white hover:bg-indigo-700">
+                                  class="w-full rounded-md border-gray-300 text-sm focus:border-brand-500 focus:ring-brand-500">{{ old('comment') }}</textarea>
+                        <button type="submit" class="rounded-md bg-brand-600 px-5 py-2 text-sm font-semibold text-white hover:bg-brand-700">
                             Submit review
                         </button>
                     </form>
@@ -116,7 +116,7 @@
             @endif
         @else
             <p class="mb-6 text-sm text-gray-500">
-                <a href="{{ route('login') }}" class="text-indigo-600 hover:underline">Log in</a> to review books you've purchased.
+                <a href="{{ route('login') }}" class="text-brand-600 hover:underline">Log in</a> to review books you've purchased.
             </p>
         @endauth
 

@@ -4,10 +4,10 @@
     <div class="flex items-center justify-between mb-5">
         <form method="GET" class="flex gap-2">
             <input type="search" name="q" value="{{ request('q') }}" placeholder="Search title or author…"
-                   class="rounded-md border-gray-300 text-sm focus:border-indigo-500 focus:ring-indigo-500">
+                   class="rounded-md border-gray-300 text-sm focus:border-brand-500 focus:ring-brand-500">
             <button class="rounded-md border border-gray-300 px-4 text-sm font-medium text-gray-700 hover:bg-gray-50">Search</button>
         </form>
-        <a href="{{ route('admin.books.create') }}" class="rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700">+ New book</a>
+        <a href="{{ route('admin.books.create') }}" class="rounded-md bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">+ New book</a>
     </div>
 
     <div class="overflow-hidden rounded-lg border border-gray-200 bg-white">
@@ -49,7 +49,7 @@
                             </span>
                         </td>
                         <td class="px-4 py-3 text-right whitespace-nowrap">
-                            <a href="{{ route('admin.books.edit', $book) }}" class="text-indigo-600 hover:text-indigo-800 font-medium">Edit</a>
+                            <a href="{{ route('admin.books.edit', $book) }}" class="text-brand-600 hover:text-brand-800 font-medium">Edit</a>
                             <form method="POST" action="{{ route('admin.books.destroy', $book) }}" class="inline ml-3"
                                   onsubmit="return confirm('Delete “{{ $book->title }}”?')">
                                 @csrf @method('DELETE')
