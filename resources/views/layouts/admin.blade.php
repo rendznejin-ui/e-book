@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? 'Admin' }} — {{ config('app.name', 'E-Book') }}</title>
+    <title>{{ $title ?? 'Admin' }} — {{ config('app.name', 'BPU') }}</title>
+    <link rel="icon" type="image/svg+xml" href="{{ asset('images/bpu-mark.svg') }}">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700|fraunces:400,500,600,700&display=swap" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -12,10 +13,15 @@
 <body class="font-sans antialiased bg-gray-100 text-gray-800">
     <div class="min-h-screen flex">
         {{-- ===================== Sidebar ===================== --}}
-        <aside class="hidden md:flex w-64 shrink-0 flex-col bg-gray-900 text-gray-300">
-            <div class="h-16 flex items-center gap-2 px-6 border-b border-gray-800">
-                <span class="text-2xl">📚</span>
-                <span class="text-lg font-semibold text-white">{{ config('app.name', 'E-Book') }}</span>
+        <aside class="hidden md:flex w-64 shrink-0 flex-col bg-brand-900 text-gray-300">
+            <div class="h-16 flex items-center gap-2.5 px-5 border-b border-white/10">
+                <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-white shadow-sm">
+                    <img src="{{ asset('images/bpu-mark.svg') }}" alt="BPU" class="h-7 w-7">
+                </span>
+                <span class="flex flex-col leading-none">
+                    <span class="font-serif text-lg font-semibold text-white">{{ config('app.name', 'BPU') }}</span>
+                    <span class="text-[9px] font-medium uppercase tracking-[0.18em] text-gray-400">Admin Console</span>
+                </span>
             </div>
 
             @php

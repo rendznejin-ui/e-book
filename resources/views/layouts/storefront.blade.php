@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? 'Books' }} — {{ config('app.name', 'E-Book') }}</title>
+    <title>{{ $title ?? 'Books' }} — {{ config('app.name', 'BPU') }}</title>
+    <link rel="icon" type="image/svg+xml" href="{{ asset('images/bpu-mark.svg') }}">
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700|fraunces:400,500,600,700,9..144&display=swap" rel="stylesheet" />
@@ -26,9 +27,12 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex h-16 items-center justify-between gap-4">
                     {{-- Brand --}}
-                    <a href="{{ route('books.index') }}" class="flex items-center gap-2 shrink-0 group">
-                        <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white text-lg shadow-sm group-hover:bg-brand-700 transition">📚</span>
-                        <span class="font-serif text-2xl font-semibold text-gray-900 tracking-tight">{{ config('app.name', 'E-Book') }}</span>
+                    <a href="{{ route('books.index') }}" class="flex items-center gap-2.5 shrink-0 group">
+                        <img src="{{ asset('images/bpu-mark.svg') }}" alt="{{ config('app.name', 'BPU') }}" class="h-10 w-10 shrink-0 transition group-hover:scale-105">
+                        <span class="flex flex-col leading-none">
+                            <span class="font-serif text-2xl font-semibold text-brand-700 tracking-tight">{{ config('app.name', 'BPU') }}</span>
+                            <span class="hidden sm:block text-[10px] font-medium uppercase tracking-[0.18em] text-gray-400">Book Production Unit</span>
+                        </span>
                     </a>
 
                     {{-- Search (GET to catalog) --}}
@@ -85,7 +89,6 @@
                                     @if (Auth::user()->isAdmin())
                                         <x-dropdown-link :href="url('/admin')">Admin dashboard</x-dropdown-link>
                                     @endif
-                                    <x-dropdown-link :href="route('dashboard')">Dashboard</x-dropdown-link>
                                     <x-dropdown-link :href="route('orders.index')">My orders</x-dropdown-link>
                                     <x-dropdown-link :href="route('wishlist.index')">My wishlist</x-dropdown-link>
                                     <x-dropdown-link :href="route('profile.edit')">Profile</x-dropdown-link>
@@ -128,13 +131,16 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
                     <div class="lg:col-span-2">
-                        <div class="flex items-center gap-2">
-                            <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white text-lg">📚</span>
-                            <span class="font-serif text-2xl font-semibold text-gray-900">{{ config('app.name', 'E-Book') }}</span>
+                        <div class="flex items-center gap-2.5">
+                            <img src="{{ asset('images/bpu-mark.svg') }}" alt="BPU" class="h-10 w-10">
+                            <span class="flex flex-col leading-none">
+                                <span class="font-serif text-2xl font-semibold text-gray-900">{{ config('app.name', 'BPU') }}</span>
+                                <span class="text-[10px] font-medium uppercase tracking-[0.18em] text-gray-400">Book Production Unit</span>
+                            </span>
                         </div>
                         <p class="mt-4 max-w-sm text-sm text-gray-500">
-                            Your modern online bookstore. Discover, preview, and collect great reads —
-                            with a fast, secure checkout and instant digital receipts.
+                            Book Production Unit — your modern online bookstore. Discover, preview, and
+                            collect great reads, with a fast, secure checkout and instant digital receipts.
                         </p>
                     </div>
                     <div>
@@ -161,7 +167,7 @@
                     </div>
                 </div>
                 <div class="mt-10 border-t border-gray-100 pt-6 flex flex-col sm:flex-row justify-between gap-2 text-xs text-gray-400">
-                    <span>&copy; {{ date('Y') }} {{ config('app.name', 'E-Book') }}. All rights reserved.</span>
+                    <span>&copy; {{ date('Y') }} {{ config('app.name', 'BPU') }}. All rights reserved.</span>
                     <span>Built with Laravel · Demo store</span>
                 </div>
             </div>

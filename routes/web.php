@@ -20,8 +20,12 @@ Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::patch('/cart/items/{item}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/cart/items/{item}', [CartController::class, 'remove'])->name('cart.remove');
 
+// Post-login landing: admins go to the admin panel, customers to the storefront.
+// (Customers never see the default Breeze dashboard.)
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return request()->user()->isAdmin()
+        ? redirect()->route('admin.dashboard')
+        : redirect()->route('books.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

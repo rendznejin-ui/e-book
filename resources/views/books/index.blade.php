@@ -6,8 +6,8 @@
         <section class="relative mb-10 overflow-hidden rounded-2xl bg-ink text-white">
             <div class="absolute inset-0 opacity-90 bg-gradient-to-br from-brand-700 via-brand-800 to-ink"></div>
             <div class="relative px-8 py-14 sm:px-12 sm:py-20 max-w-2xl">
-                <span class="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-brand-100 ring-1 ring-inset ring-white/20">
-                    ✦ Curated reads, fair prices
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-accent-300 ring-1 ring-inset ring-white/20">
+                    <span class="text-accent-400">✦</span> Curated reads, fair prices
                 </span>
                 <h1 class="mt-5 font-serif text-4xl sm:text-5xl font-semibold leading-tight">
                     Find your next<br>great read.

@@ -9,6 +9,6 @@ return [
     'tax_percent' => (float) env('STORE_TAX_PERCENT', 0),
 
     // Store / merchant identity shown on receipts.
-    'name' => env('STORE_NAME', 'E-Book Store'),
+    'name' => env('STORE_NAME', 'Book Production Unit'),
     'support_email' => env('STORE_SUPPORT_EMAIL', 'support@ebook.test'),
 ];

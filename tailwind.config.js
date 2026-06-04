@@ -12,21 +12,34 @@ export default {
     theme: {
         extend: {
             colors: {
-                // Brand accent — a refined emerald, "bookish" and premium.
+                // Brand — deep navy/indigo from the BPU logo.
                 brand: {
-                    50: '#ecfdf5',
-                    100: '#d1fae5',
-                    200: '#a7f3d0',
-                    300: '#6ee7b7',
-                    400: '#34d399',
-                    500: '#10b981',
-                    600: '#059669',
-                    700: '#047857',
-                    800: '#065f46',
-                    900: '#064e3b',
+                    50: '#f5f5fb',
+                    100: '#ebeaf6',
+                    200: '#d2d0ec',
+                    300: '#aaa6d9',
+                    400: '#7d77c0',
+                    500: '#564fa3',
+                    600: '#3f3a86',
+                    700: '#2d2a5e', // logo navy
+                    800: '#252247',
+                    900: '#1b1934',
                 },
-                // Warm paper-like neutral for surfaces.
-                ink: '#1c1917',
+                // Accent — amber/gold from the BPU logo pages & circuitry.
+                accent: {
+                    50: '#fff8eb',
+                    100: '#feecc7',
+                    200: '#fdd88a',
+                    300: '#fbc04d',
+                    400: '#f5a623', // logo amber
+                    500: '#e88c10',
+                    600: '#c96c0a',
+                    700: '#a14e0d',
+                    800: '#834012',
+                    900: '#6e3512',
+                },
+                // Deep navy-black for hero/announcement surfaces.
+                ink: '#1b1934',
             },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
