@@ -15,14 +15,39 @@ class Book extends Model
 
     protected $fillable = [
         'category_id', 'title', 'slug', 'author', 'isbn', 'description',
-        'price_cents', 'stock_qty', 'cover_image', 'preview_pdf', 'is_active',
+        'price_cents', 'compare_at_cents', 'stock_qty', 'cover_image', 'preview_pdf', 'is_active',
     ];
 
     protected $casts = [
         'price_cents' => 'integer',
+        'compare_at_cents' => 'integer',
         'stock_qty' => 'integer',
         'is_active' => 'boolean',
     ];
+
+    /** True when a higher list price is set — i.e. the book is marked down. */
+    public function onSale(): bool
+    {
+        return $this->compare_at_cents !== null && $this->compare_at_cents > $this->price_cents;
+    }
+
+    /** Whole-number discount percentage (e.g. 40 for "40% OFF"). */
+    public function discountPercent(): int
+    {
+        if (! $this->onSale()) {
+            return 0;
+        }
+
+        return (int) round((1 - $this->price_cents / $this->compare_at_cents) * 100);
+    }
+
+    /** Formatted list price, e.g. "24.99". */
+    protected function comparePrice(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->compare_at_cents ? number_format($this->compare_at_cents / 100, 2) : null,
+        );
+    }
 
     public function category(): BelongsTo
     {

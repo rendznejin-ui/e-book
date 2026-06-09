@@ -73,6 +73,21 @@ class DatabaseSeeder extends Seeder
             );
         }
 
+        // Mark some titles down (compare_at = original list price) so the
+        // storefront shows "% OFF" deals out of the box.
+        $deals = [
+            'the-midnight-library' => 1999,
+            'clean-code' => 4499,
+            'atomic-habits' => 2499,
+            'the-pragmatic-programmer' => 4999,
+            'zero-to-one' => 2499,
+            'matilda' => 1499,
+            'cosmos' => 2499,
+        ];
+        foreach ($deals as $slug => $compareAtCents) {
+            Book::where('slug', $slug)->update(['compare_at_cents' => $compareAtCents]);
+        }
+
         // Generate placeholder cover images for a demo-ready catalogue.
         $this->call('books:covers');
     }

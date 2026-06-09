@@ -77,6 +77,7 @@ class BookController extends Controller
             'isbn' => ['nullable', 'string', 'max:20', Rule::unique('books', 'isbn')->ignore($book)],
             'description' => ['nullable', 'string', 'max:5000'],
             'price' => ['required', 'numeric', 'min:0', 'max:100000'],
+            'compare_at' => ['nullable', 'numeric', 'min:0', 'gte:price'],
             'stock_qty' => ['required', 'integer', 'min:0'],
             'is_active' => ['nullable', 'boolean'],
             'cover_image' => ['nullable', 'image', 'max:2048'],          // 2 MB
@@ -92,6 +93,9 @@ class BookController extends Controller
         $book->isbn = $data['isbn'] ?? null;
         $book->description = $data['description'] ?? null;
         $book->price_cents = (int) round($data['price'] * 100);
+        $book->compare_at_cents = ! empty($data['compare_at'])
+            ? (int) round($data['compare_at'] * 100)
+            : null;
         $book->stock_qty = $data['stock_qty'];
         $book->is_active = $request->boolean('is_active');
 

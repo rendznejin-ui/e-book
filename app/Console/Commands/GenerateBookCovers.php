@@ -67,7 +67,7 @@ class GenerateBookCovers extends Command
         SVG;
     }
 
-    /** Wrap text into at most $maxLines lines of roughly $width chars. */
+    
     private function wrap(string $text, int $width, int $maxLines): array
     {
         $lines = explode("\n", wordwrap($text, $width, "\n", true));

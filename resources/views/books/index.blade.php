@@ -2,7 +2,7 @@
     <x-slot name="title">{{ $activeCategory?->name ?? 'Browse Books' }}</x-slot>
 
     {{-- Hero (landing only) --}}
-    @if (! request('q') && ! $activeCategory && $books->currentPage() === 1)
+    @if ($isLanding)
         <section class="relative mb-10 overflow-hidden rounded-2xl bg-ink text-white">
             <div class="absolute inset-0 opacity-90 bg-gradient-to-br from-brand-700 via-brand-800 to-ink"></div>
             <div class="relative px-8 py-14 sm:px-12 sm:py-20 max-w-2xl">
@@ -23,6 +23,56 @@
                 </form>
             </div>
         </section>
+    @endif
+
+    {{-- Shop by Category + Today's Deals (landing only) --}}
+    @if ($isLanding)
+        <section class="mb-12">
+            <h2 class="font-serif text-2xl font-semibold text-gray-900 mb-4">Shop by category</h2>
+            @php
+                $tileGradients = [
+                    'from-brand-600 to-brand-800',
+                    'from-accent-400 to-accent-600',
+                    'from-brand-700 to-brand-900',
+                    'from-accent-500 to-accent-700',
+                    'from-brand-500 to-brand-700',
+                ];
+            @endphp
+            <div class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-4">
+                @foreach ($categories as $category)
+                    @php $grad = $tileGradients[crc32($category->name) % count($tileGradients)]; @endphp
+                    <a href="{{ route('books.index', ['category' => $category->slug]) }}"
+                       class="group rounded-xl overflow-hidden border border-gray-200/80 bg-white shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition">
+                        <div class="aspect-square flex items-center justify-center bg-gradient-to-br {{ $grad }}">
+                            <span class="text-5xl drop-shadow-sm transition group-hover:scale-110">{{ $category->icon() }}</span>
+                        </div>
+                        <div class="p-2.5 text-center">
+                            <span class="text-sm font-medium text-gray-800 group-hover:text-brand-700">{{ $category->name }}</span>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+        </section>
+
+        @if ($deals->isNotEmpty())
+            <section class="mb-12">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="font-serif text-2xl font-semibold text-gray-900">
+                        🏷️ Today's deals
+                    </h2>
+                    <a href="{{ route('books.index', ['sale' => 1]) }}" class="text-sm font-medium text-brand-700 hover:text-brand-800">View all deals →</a>
+                </div>
+                <div class="flex gap-4 overflow-x-auto pb-4 -mx-1 px-1 snap-x">
+                    @foreach ($deals as $book)
+                        <div class="w-44 sm:w-52 shrink-0 snap-start">
+                            <x-book-card :book="$book" />
+                        </div>
+                    @endforeach
+                </div>
+            </section>
+        @endif
+
+        <h2 class="font-serif text-2xl font-semibold text-gray-900 mb-4">All books</h2>
     @endif
 
     <div class="flex flex-col lg:flex-row gap-8">
@@ -46,6 +96,16 @@
                         </li>
                     @endforeach
                 </ul>
+            </div>
+
+            {{-- Deals filter --}}
+            <div>
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-gray-500 mb-3">Deals</h2>
+                <a href="{{ route('books.index', request()->boolean('sale') ? request()->except(['sale', 'page']) : array_merge(request()->except('page'), ['sale' => 1])) }}"
+                   class="flex items-center justify-between rounded px-3 py-2 text-sm {{ request()->boolean('sale') ? 'bg-accent-50 text-accent-700 font-medium' : 'text-gray-700 hover:bg-gray-100' }}">
+                    <span>🏷️ On sale</span>
+                    @if (request()->boolean('sale'))<span>✓</span>@endif
+                </a>
             </div>
 
             {{-- Mobile search (the nav search is hidden on small screens) --}}

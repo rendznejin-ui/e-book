@@ -33,7 +33,18 @@
                 <span class="text-sm text-gray-500">{{ $book->category->name }}</span>
             </div>
 
-            <p class="mt-6 text-3xl font-bold text-gray-900">${{ $book->price }}</p>
+            <div class="mt-6 flex items-baseline gap-3">
+                <span class="text-3xl font-bold text-gray-900">${{ $book->price }}</span>
+                @if ($book->onSale())
+                    <span class="text-lg text-gray-400 line-through">${{ $book->comparePrice }}</span>
+                    <span class="rounded-md bg-accent-500 px-2 py-1 text-sm font-bold text-white">{{ $book->discountPercent() }}% OFF</span>
+                @endif
+            </div>
+            @if ($book->onSale())
+                <p class="mt-1 text-sm font-medium text-accent-700">
+                    You save ${{ number_format(($book->compare_at_cents - $book->price_cents) / 100, 2) }}
+                </p>
+            @endif
 
             <div class="mt-2">
                 @if ($book->stock_qty > 0)

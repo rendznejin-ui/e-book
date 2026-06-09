@@ -10,9 +10,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class BookController extends Controller
 {
-    /**
-     * Public catalog: active books with optional search + category filter.
-     */
+    
     public function index(Request $request)
     {
         $query = Book::query()
@@ -20,7 +18,6 @@ class BookController extends Controller
             ->withAvg('reviews', 'rating')
             ->withCount('reviews');
 
-        // Keyword search across title and author.
         if ($term = trim((string) $request->query('q', ''))) {
             $query->where(function ($q) use ($term) {
                 $q->where('title', 'like', "%{$term}%")
@@ -28,7 +25,6 @@ class BookController extends Controller
             });
         }
 
-        // Category filter by slug.
         $activeCategory = null;
         if ($slug = $request->query('category')) {
             $activeCategory = Category::where('slug', $slug)->first();
@@ -37,7 +33,6 @@ class BookController extends Controller
             }
         }
 
-        // Sorting.
         $sort = $request->query('sort');
         match ($sort) {
             'price_asc' => $query->orderBy('price_cents'),
@@ -46,18 +41,35 @@ class BookController extends Controller
             default => $query->latest(),
         };
 
+        
+        if ($request->boolean('sale')) {
+            $query->whereColumn('compare_at_cents', '>', 'price_cents');
+        }
+
         $books = $query->paginate(12)->withQueryString();
+
+        $isLanding = ! $request->query('q') && ! $activeCategory
+            && ! $request->boolean('sale') && $books->currentPage() === 1;
+
+        $deals = collect();
+
+        if ($isLanding) {
+            $deals = Book::where('is_active', true)
+                ->whereColumn('compare_at_cents', '>', 'price_cents')
+                ->withAvg('reviews', 'rating')->withCount('reviews')
+                ->latest()->take(8)->get();
+        }
 
         return view('books.index', [
             'books' => $books,
             'categories' => Category::orderBy('name')->get(),
             'activeCategory' => $activeCategory,
+            'isLanding' => $isLanding,
+            'deals' => $deals,
         ]);
     }
 
-    /**
-     * Single book detail page. Route-model bound by slug (see Book::getRouteKeyName).
-     */
+    
     public function show(Book $book)
     {
         abort_unless($book->is_active, 404);
@@ -80,13 +92,7 @@ class BookController extends Controller
         return view('books.show', compact('book', 'related', 'canReview', 'userReview'));
     }
 
-    /**
-     * Securely stream a book's sample PDF.
-     *
-     * The file lives on the private "local" disk (storage/app/private), so it is
-     * NOT directly web-accessible — it can only be reached through this route,
-     * giving us a single place to add access control later.
-     */
+   
     public function preview(Book $book): StreamedResponse
     {
         abort_if(! $book->is_active || ! $book->preview_pdf, 404);

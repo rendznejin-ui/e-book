@@ -45,6 +45,14 @@
             </div>
 
             <div>
+                <label class="block text-sm font-medium text-gray-700">List price <span class="text-gray-400">(optional)</span></label>
+                <input name="compare_at" type="number" step="0.01" min="0"
+                       value="{{ old('compare_at', $book->compare_at_cents ? number_format($book->compare_at_cents / 100, 2, '.', '') : '') }}"
+                       class="mt-1 w-full rounded-md border-gray-300 focus:border-brand-500 focus:ring-brand-500">
+                <p class="text-xs text-gray-400 mt-1">Original price. If higher than price, a discount badge shows.</p>
+            </div>
+
+            <div>
                 <label class="block text-sm font-medium text-gray-700">Stock</label>
                 <input name="stock_qty" type="number" min="0" value="{{ old('stock_qty', $book->stock_qty ?? 0) }}" required
                        class="mt-1 w-full rounded-md border-gray-300 focus:border-brand-500 focus:ring-brand-500">
